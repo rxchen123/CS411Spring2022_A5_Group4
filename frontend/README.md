@@ -2,7 +2,7 @@
 
 ## Project setup
 ```
-npm install
+npx create-react-app
 ```
 
 ### Compiles and hot-reloads for development
