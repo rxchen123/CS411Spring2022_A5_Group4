@@ -1,0 +1,21 @@
+<!doctype html>
+<title>TravelHelper</title>
+{% if message %}
+  <h4>{{message}}</h4>
+{% endif %}
+{% if name %}
+  <h1>You are logged in as: {{ name }}</h1>
+  <ul>
+    <li><a href='/profile'>Profile</a></li>
+    <li><a href='/upload'>Trips</a></li>
+    <li><a href='/logout'>Logout</a></li>
+  </ul>
+{% else %}
+  {%if logout%}
+    <h1><a href='/'>Home</a></h1>
+  {% else %}
+    <h1><a href='/login'>Login</a></h1>
+    <h1><a href='/register'>Register</a></h1>
+  {% endif %}
+{% endif %}
+

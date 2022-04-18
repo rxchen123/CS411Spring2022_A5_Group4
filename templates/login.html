@@ -1,0 +1,21 @@
+<head>
+    <title>TravelHelper</title>
+</head>
+{% if message %}
+  <h4>{{message}}</h4>
+{% endif %}
+<body>
+    <div class="title">
+        <h1> Login </h1>
+    </div>
+    <div id="content">
+        <form action='login' method='POST' action="{{ url_for('login') }}" >            
+            <label for="email">enter email:</label>
+            <input type='text' name='email' id='email' placeholder='email'></input></br>
+            <label for="password">enter password:</label>
+            <input type='password' name='password' id='password' placeholder='password'></input><br/>
+            <input type='submit' name='submit'></input>
+        </form></div></br>
+     </div>
+</body>
+<h1><a href='/'>Home</a></h1>
