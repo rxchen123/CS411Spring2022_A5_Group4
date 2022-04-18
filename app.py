@@ -1,10 +1,10 @@
 ###############################################################################
-# some code adapted from:													 #
-# https://www.askpython.com/python-modules/flask/create-hello-world-in-flask #								
-# https://www.askpython.com/python-modules/flask/flask-mysql-database        #
-# flask-login: https://github.com/maxcountryman/flask-login/	             #
-# 			   https://flask-login.readthedocs.io/en/latest/		         #
-##############################################################################
+# some code adapted from cs460 spring-22 pa1 skeleton and:					  #
+# https://www.askpython.com/python-modules/flask/create-hello-world-in-flask  #								
+# https://www.askpython.com/python-modules/flask/flask-mysql-database         #
+# flask-login: https://github.com/maxcountryman/flask-login/	              #
+# 			   https://flask-login.readthedocs.io/en/latest/		          #
+###############################################################################
 
 import flask
 from flask import Flask, Response, request, render_template, redirect, url_for

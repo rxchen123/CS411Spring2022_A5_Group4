@@ -1,4 +1,4 @@
-To set up the MySQL DB, do the following:
+To set up the MySQL DB, do the following (You can stop at step 2 if DB has already been set up):
 	1. install XAMPP (if necessary, see: https://www.askpython.com/python-modules/flask/flask-mysql-database)
 	2. Launch XAMPP. Under the 'Manager Servers' tab, start the 'MySQL Database' and 'Apache Web Server'
 	3. Open a web browser and go to 'localhost'
