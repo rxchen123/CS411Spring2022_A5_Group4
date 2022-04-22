@@ -2,7 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import CurrencyCalc from './CurrencyCalc';
 import reportWebVitals from './reportWebVitals';
+import Header from './App';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link
+}
+from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
