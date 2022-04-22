@@ -13,7 +13,6 @@ const Currency = () => {
           <select>
               <option value="(USD)"> US dollar (USD) </option>
               <option value="(EUR)"> Euro (EUR) </option>
-              <option value="(CAD)"> Canadian dollar (CAD) </option>
               <option value="(CNH)"> Chinese renminbi (CNH) </option>
           </select>
       </form>
@@ -33,13 +32,12 @@ const Currency = () => {
           <select>
               <option value="(USD)"> US dollar (USD) </option>
               <option value="(EUR)"> Euro (EUR) </option>
-              <option value="(CAD)"> Canadian dollar (CAD) </option>
               <option value="(CNH)"> Chinese renminbi (CNH) </option>
           </select>
       </form>
       <form align="center">
           <label>
-              Input Amount
+              Converted Amount
           </label>
           <input
             type = 'integer'
