@@ -28,9 +28,16 @@ function Navigation() {
                   Sign Up
                 </NavLink>
               </li>
-              <Link to={"./Dashboard"}>
-                Dashboard
-                    </Link>
+              <li>
+                <NavLink className="nav-link" to={"./Currency"}>
+                  Currency
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="nav-link" to={"./Dashboard"}>
+                  Dashboard
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>
