@@ -18,14 +18,14 @@
     margin-top: 10px;
     cursor: pointer;
     font-size: 15px;
-    background: #01d28e;
+    background: red;
     border: 1px solid #01d28e;
     color: #fff;
     padding: 10px 20px;
   }
   
   input[type="submit"]:hover {
-    background: #6cf0c2;
+    background: red;
   }
   
   .button-container {
