@@ -14,7 +14,6 @@
     border-radius: 5px;
     margin-top: 10px;
     cursor: pointer;
-    font-size: larger;
     background-color: red;
     display: block;
     color: white;
@@ -53,7 +52,7 @@
   }
   
   .input-container {
+    padding: 5px;
     text-align: left;
-    gap: 8px;
-    margin: 10px;
+    margin: 2px;
   }

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useHistory } from "react";
 import ReactDOM from "react-dom";
 import "./Signin.css";
 
 function Signin() {
+
   // React States
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -101,4 +102,7 @@ function Signin() {
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(<Signin />, rootElement);
+
 export default Signin;
+//useHistory hook initialization - lets us redirect back to the homepage
+const history = useHistory;
