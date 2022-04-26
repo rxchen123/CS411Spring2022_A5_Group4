@@ -28,6 +28,19 @@ function Navigation() {
                   Sign Up
                 </NavLink>
               </li>
+<<<<<<< HEAD
+=======
+              <li>
+                <NavLink className="nav-link" to={"./Currency"}>
+                  Currency
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="nav-link" to={"./Dashboard"}>
+                  Dashboard
+                </NavLink>
+              </li>
+>>>>>>> af5675a4d805f6b20838d1d88a2cddcde8d5d21a
             </ul>
           </div>
         </div>

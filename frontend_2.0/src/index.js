@@ -8,7 +8,10 @@ import {
   Footer,
   Home,
   Signin,
-  Signup
+  Signup,
+  Currency,
+  Dashboard
+
 } from "./components";
 
 ReactDOM.render(
@@ -17,7 +20,9 @@ ReactDOM.render(
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/signup" element={<Signup />} />
-      <Route path="/signin" element={<Signin />}>
+      <Route path="/signin" element={<Signin />} />
+      <Route path="/currency" element={<Currency />} />
+      <Route path="/dashboard" element={<Dashboard />} >
       </Route>
     </Routes>
     <Footer />
