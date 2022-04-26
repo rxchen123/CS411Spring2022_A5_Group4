@@ -20,7 +20,7 @@ function Signin() {
   ];
 
   const errors = {
-    uname: "invalid username",
+    email: "invalid username",
     pass: "invalid password"
   };
 
@@ -28,10 +28,10 @@ function Signin() {
     //Prevent page reload
     event.preventDefault();
 
-    var { uname, pass } = document.forms[0];
+    var { email, pass } = document.forms[0];
 
     // Find user login info
-    const userData = database.find((user) => user.username === uname.value);
+    const userData = database.find((user) => user.username === email.value);
 
     // Compare user info
     if (userData) {
@@ -43,7 +43,7 @@ function Signin() {
       }
     } else {
       // Username not found
-      setErrorMessages({ name: "uname", message: errors.uname });
+      setErrorMessages({ name: "email", message: errors.email });
     }
   };
 
@@ -58,12 +58,12 @@ function Signin() {
     <div className="form">
       <form onSubmit={handleSubmit}>
         <div className="input-container">
-          <label>Username </label>
-          <input type="text" name="uname" required />
-          {renderErrorMessage("uname")}
+          <label className = "label"> Email</label>
+          <input type="text" name="email" required />
+          {renderErrorMessage("email")}
         </div>
         <div className="input-container">
-          <label>Password </label>
+          <label className = "label">Password </label>
           <input type="password" name="pass" required />
           {renderErrorMessage("pass")}
         </div>

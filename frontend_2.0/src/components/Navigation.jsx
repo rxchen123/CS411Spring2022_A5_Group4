@@ -7,7 +7,7 @@ function Navigation() {
     <div className="navigation">
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <div className="container">
-          <NavLink className="navbar-brand" to="/">
+          <NavLink className="navbar-brand" to="/" font-family = 'Didot'>
             TripHelper :)
           </NavLink>
           <div>
@@ -28,8 +28,6 @@ function Navigation() {
                   Sign Up
                 </NavLink>
               </li>
-<<<<<<< HEAD
-=======
               <li>
                 <NavLink className="nav-link" to={"./Currency"}>
                   Currency
@@ -40,7 +38,6 @@ function Navigation() {
                   Dashboard
                 </NavLink>
               </li>
->>>>>>> af5675a4d805f6b20838d1d88a2cddcde8d5d21a
             </ul>
           </div>
         </div>
