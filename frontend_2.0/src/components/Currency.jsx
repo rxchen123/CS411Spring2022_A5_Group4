@@ -1,9 +1,21 @@
 import React from 'react';
 
 function Currency() {
+  
+  /*
+  const
+  
+  
+  */
+  
+  
+  
+  
+  
+  
   return (
     <div className="Currency">
-      
+      <br/>
       <div align="center">
           <div class="col-lg-5">
             <h1 class="font-weight-light">Currency Converter</h1>
@@ -19,21 +31,21 @@ function Currency() {
         <v-row>
 
           <v-col align="center">
-            <form align="center">
+            <form value="currency_input_type" align="center">
               <label>
                 From:
               </label>
               <select>
-                <option value="(USD)"> US dollar (USD) </option>
-                <option value="(EUR)"> Euro (EUR) </option>
-                <option value="(CNH)"> Chinese renminbi (CNH) </option>
+                <option currency_input_type="(USD)"> US dollar (USD) </option>
+                <option currency_input_type="(EUR)"> Euro (EUR) </option>
+                <option currency_input_type="(CNH)"> Chinese renminbi (CNH) </option>
               </select>
             </form>
-            <form align="center">
+            <form value="currency_input_value" align="center">
               <label>
-                Input Amount:
+                Input Amount: 
               </label>
-              <input
+              <input 
                 type = 'integer'
                 required
               />
@@ -45,19 +57,19 @@ function Currency() {
 
           <v-col align="center">
 
-            <form align="center">
+            <form value="currency_output_type" align="center">
               <label>
                 To:
               </label>
               <select>
-                <option value="(USD)"> US dollar (USD) </option>
-                <option value="(EUR)"> Euro (EUR) </option>
-                <option value="(CNH)"> Chinese renminbi (CNH) </option>
+                <option currency_output_type="(USD)"> US dollar (USD) </option>
+                <option currency_output_type="(EUR)"> Euro (EUR) </option>
+                <option currency_output_type="(CNH)"> Chinese renminbi (CNH) </option>
               </select>
             </form>
-            <form align="center">
+            <form value="currency_output_value" align="center">
               <label>
-                Output Amount:
+                Output Amount: 
               </label>
               <input
                 type = 'integer'
@@ -69,7 +81,9 @@ function Currency() {
           
         </v-row>
           
-      
+        <button  className="btn" type="submit">
+            Submit
+            </button>
       </div>
     </div>
   );

@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import {Link} from "react-router-dom";
 
 function Navigation() {
   return (
@@ -28,8 +27,6 @@ function Navigation() {
                   Sign Up
                 </NavLink>
               </li>
-<<<<<<< HEAD
-=======
               <li>
                 <NavLink className="nav-link" to={"./Currency"}>
                   Currency
@@ -40,7 +37,6 @@ function Navigation() {
                   Dashboard
                 </NavLink>
               </li>
->>>>>>> af5675a4d805f6b20838d1d88a2cddcde8d5d21a
             </ul>
           </div>
         </div>
