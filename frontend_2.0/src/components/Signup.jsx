@@ -66,8 +66,6 @@ function Signup() {
     );
   };
 
-
-
   return (
     <div className="signup">
       <div class="container">
@@ -77,15 +75,15 @@ function Signup() {
 
           <form>
             {/* Labels and inputs for form data */}
-            <label className="label">Name</label>
+            <label className="label">Name:</label>
             <input onChange={handleName} className="input"
             value={name} type="text" />
 
-            <label className="label">Email</label>
+            <label className="label">Email:</label>
             <input onChange={handleEmail} className="input"
             value={email} type="email" />
 
-            <label className="label">Password</label>
+            <label className="label">Password:</label>
             <input onChange={handlePassword} className="input"
             value={password} type="password" />
 

@@ -7,7 +7,7 @@ function Navigation() {
     <div className="navigation">
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <div className="container">
-          <NavLink className="navbar-brand" to="/" font-family = 'Didot'>
+          <NavLink className="navbar-brand" to="/" >
             TripHelper :)
           </NavLink>
           <div>
