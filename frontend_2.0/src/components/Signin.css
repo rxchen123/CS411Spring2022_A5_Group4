@@ -1,11 +1,7 @@
 .app {
-    font-family: sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
-    font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-family: Didot;
+    text-align: center;
+    background-color: green;
   }
   
   input[type="text"],
@@ -15,13 +11,15 @@
   }
   
   input[type="submit"] {
+    border-radius: 5px;
     margin-top: 10px;
     cursor: pointer;
-    font-size: 15px;
-    background: red;
-    border: 1px solid #01d28e;
-    color: #fff;
-    padding: 10px 20px;
+    font-size: larger;
+    background-color: red;
+    display: block;
+    color: white;
+    border: red;
+    padding: 10px;
   }
   
   input[type="submit"]:hover {
@@ -29,13 +27,13 @@
   }
   
   .button-container {
-    display: flex;
-    justify-content: center;
+    font-size: larger;
+    padding: 5px;
+    margin: 2px;
   }
   
   .login-form {
     background-color: white;
-    padding: 2rem;
   }
   
   .list-container {
@@ -47,14 +45,15 @@
     font-size: 12px;
   }
   
-  .title {
-    font-size: 25px;
-    margin-bottom: 20px;
+  .label{
+    text-align: left;
+    display: block;
+    font-size: larger;
+    color: rgb(0, 0, 0);
   }
   
   .input-container {
-    display: flex;
-    flex-direction: column;
+    text-align: left;
     gap: 8px;
     margin: 10px;
   }
