@@ -1,4 +1,5 @@
 import React from 'react';
+import travel from './travel.png'
 
 function Home() {
   return (
@@ -8,7 +9,7 @@ function Home() {
           <div class="col-lg-7">
             <img
               class="img-fluid rounded mb-4 mb-lg-0"
-              src="http://placehold.it/900x400"
+              src= {travel}
               alt=""
             />
           </div>
