@@ -10,7 +10,6 @@ import {
   Signin,
   Signup,
   Currency,
-  Dashboard
 
 } from "./components";
 
