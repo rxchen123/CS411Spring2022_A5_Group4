@@ -32,6 +32,11 @@ function Navigation() {
                   Currency
                 </NavLink>
               </li>
+              <li>
+                <NavLink className="nav-link" to={"./Trips"}>
+                  Trips
+                </NavLink>
+              </li>
             </ul>
           </div>
         </div>
