@@ -10,7 +10,16 @@ function Currency() {
   
   
   
-  
+var requestURL = 'https://api.exchangerate.host/latest';
+var request = new XMLHttpRequest();
+request.open('GET', requestURL);
+request.responseType = 'json';
+request.send();
+
+request.onload = function() {
+  var response = request.response;
+  console.log(response);
+}
   
   
   return (
@@ -18,6 +27,7 @@ function Currency() {
       <br/>
       <div align="center">
           <div class="col-lg-5">
+            {/* Lables and input for currency data */}
             <h1 class="font-weight-light">Currency Converter</h1>
             <p>
               Here is where you convert currency
