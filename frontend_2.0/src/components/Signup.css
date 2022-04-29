@@ -45,7 +45,7 @@
     
     .success{
         display: block;
-        background-color: lightblue;
+        background-color: red;
         color: black;
         width: fit-content;
         height: 50px;
