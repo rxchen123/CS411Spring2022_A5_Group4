@@ -12,10 +12,9 @@ CREATE TABLE Users (
 -- If a user is deleted, all of the trips referencing the user will be deleted as well. 
 CREATE TABLE Trips (
   uemail VARCHAR(255),
-	budget INT,
-	source VARCHAR(255) NOT NULL,
-	destination VARCHAR(255) NOT NULL,
-  PRIMARY KEY (uemail, source, destination),
+	hotel VARCHAR(255) NOT NULL,
+	restaurant VARCHAR(255) NOT NULL,
+  PRIMARY KEY (uemail, hotel, restaurant),
 	FOREIGN KEY (uemail) REFERENCES Users(email) ON DELETE CASCADE
 );
 
@@ -26,9 +25,9 @@ INSERT INTO Users (email, password) VALUES ('brad@bu.edu', 'password');
 
 -- Run these commands if you want to add some trips:
 USE travelhelper;
-INSERT INTO Trips (uemail, budget, source, destination) VALUES ('annie@bu.edu', 5000, 'Boston', 'London');
-INSERT INTO Trips (uemail, budget, source, destination) VALUES ('annie@bu.edu', 3000, 'San Francisco', 'New York');
-INSERT INTO Trips (uemail, budget, source, destination) VALUES ('brad@bu.edu', 1500, 'Chicago', 'Indianapolis');
+INSERT INTO Trips (uemail, hotel, restaurant) VALUES ('annie@bu.edu', 'Mariott', 'McDonalds');
+INSERT INTO Trips (uemail, hotel, restaurant) VALUES ('annie@bu.edu', 'Holiday Inn', 'Chipotle');
+INSERT INTO Trips (uemail, hotel, restaurant) VALUES ('brad@bu.edu',  'Hilton', 'Wendys');
 
 -- Run these commands if you want to delete a table:
 USE travelhelper;

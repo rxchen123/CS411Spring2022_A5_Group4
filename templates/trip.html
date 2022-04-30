@@ -1,15 +1,33 @@
 <head>
     <title>TravelHelper</title>
 </head>
-    <body>
-        <div class="title">
-            <h1>Create a Trip!</h1>
-        </div>
-            <form method="post" enctype="multipart/form-data" action="/upload">
-                <label for="photo">Select photo:</label>
-                <input type="file" name="photo" required='true' /><br />
-                <label for="caption">Please caption:</label>
-                <input type="text" name="caption" required='true'/><br />
-                <input type="submit" value="Upload"/>
-            </form>
-    </body>
+<body>
+    {% if name %}
+    {% if message %}
+        <h4>It looks like this trip already exists!</h4>
+    {% endif %}
+    <h1>Create a Trip!</h1>
+    <div id="trip">
+        <form method="post" action="{{ url_for('add_trip') }}">
+            <label for="hotel">choose a hotel:</label>
+            <input type="text" name="hotel"/><br/>
+            <label for="restaurant">choose a restaurant:</label>
+            <input type="text" name="restaurant"/><br/>
+            <input type="submit"/>
+        </form>
+    </div>
+    <ul>
+        <li><a href='/home'>Home</a></li>
+        <li><a href='/profile'>Profile</a> </li>
+        <li><a href='/logout'>Logout</a> </li>
+      </ul>
+    {% else %}
+    <h1>You are logged out.</h1>
+    <ul>
+        <li><a href='/'>Home</a></li>
+        <li><a href='/login'>Login</a> </li>
+        <li><a href='/register'>Register</a></li>
+    </ul>
+{% endif %}
+</body>
+

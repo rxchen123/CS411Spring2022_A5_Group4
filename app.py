@@ -1,18 +1,17 @@
 ###############################################################################
-# some code adapted from cs460 spring-22 pa1 skeleton and:					  #
+# some code adapted from:					  								  #
 # https://www.askpython.com/python-modules/flask/create-hello-world-in-flask  #								
 # https://www.askpython.com/python-modules/flask/flask-mysql-database         #
 # flask-login: https://github.com/maxcountryman/flask-login/	              #
 # 			   https://flask-login.readthedocs.io/en/latest/		          #
 ###############################################################################
 
+from crypt import methods
 import flask
 from flask import Flask, Response, request, render_template, redirect, url_for
 from flaskext.mysql import MySQL
 import flask_login
-
-# for image uploading
-# import os, base64
+import sys
 
 mysql = MySQL()
 app = Flask(__name__)
@@ -53,6 +52,7 @@ class User(flask_login.UserMixin):
 # (essentially a 're-login' but to the user it looks like they are in a sesions)
 @login_manager.user_loader
 def user_loader(email):
+	global users
 	users = getUserList()
 	if not(email) or email not in str(users):
 		return
@@ -60,7 +60,7 @@ def user_loader(email):
 	user.id = email
 	return user
 
-# handle unauthorized (shouldn't see this usually, session timeouts maybe?? NOT SURE)
+# handle unauthorized actions (shouldn't see this usually, session timeouts maybe?? NOT SURE)
 @login_manager.unauthorized_handler
 def unauthorized_handler():
 	return render_template('unauth.html')
@@ -68,6 +68,7 @@ def unauthorized_handler():
 # reuqest loader: for regular logins without cookies
 @login_manager.request_loader
 def request_loader(request):
+	global users
 	users = getUserList()
 	email = request.form.get('email')
 	if not(email) or email not in str(users):
@@ -77,23 +78,16 @@ def request_loader(request):
 	cursor = mysql.connect().cursor()
 	cursor.execute("SELECT password FROM Users WHERE email = '{0}'".format(email))
 	data = cursor.fetchall()
-	pwd = str(data[0][0] )
+	pwd = str(data[0][0])
 	user.is_authenticated = request.form['password'] == pwd
 	return user
-
-'''
-A new page looks like this:
-@app.route('new_page_name')
-def new_page_function():
-	return new_page_html
-'''
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
 	if flask.request.method == 'GET':
 		return render_template('login.html')
 		
-	else: # request method is POST (page is recieving data)
+	else: # request method is POST 
 		email = flask.request.form['email']
 		cursor = conn.cursor()
 		
@@ -112,8 +106,6 @@ def login():
 	# information did not match
 	return render_template("login.html", message='Please try again.')
 	
-
-
 # specific methods (GET/POST) can be specified in the function header instead of inside the functions 
 @app.route("/register", methods=['GET'])
 def register():
@@ -131,6 +123,8 @@ def bad_email():
 
 @app.route("/register", methods=['POST'])
 def register_user():
+	global users
+	users = getUserList()
 	try:
 		email=request.form.get('email')
 		password=request.form.get('password')
@@ -168,7 +162,7 @@ def getUserTrips(email):
 	""" get all of a user's trips """
 
 	cursor = conn.cursor()
-	cursor.execute("SELECT budget, source, destination FROM Trips WHERE uemail = '{0}'".format(email))
+	cursor.execute("SELECT hotel, restaurant FROM Trips WHERE uemail = '{0}'".format(email))
 	return cursor.fetchall() # note: return a list of tuples, [(budget, source, destination), ...]
 
 def isEmailUnique(email):
@@ -199,12 +193,46 @@ def logout():
 	flask_login.logout_user() # logout 
 	return render_template('index.html', message='Successfully Logged Out', logout=True)
 
-
 # render the profile page (must be logged in) 
 @app.route('/profile')
 @flask_login.login_required # this decorator specifies that /home requires users to be logged in
 def profile():
 	return render_template('profile.html', name=flask_login.current_user.id)
+
+
+# render the trips page (must be logged in) 
+@app.route('/trip', methods=['GET'])
+@flask_login.login_required 
+def trip():
+	return render_template('trip.html', name=flask_login.current_user.id)
+
+@app.route('/valid-trip', methods=['GET'])
+@flask_login.login_required 
+def valid_trip():
+	return render_template('trip.html', name=flask_login.current_user.id, message='Trip created!')
+
+
+@app.route('/invalid-trip', methods=['GET'])
+@flask_login.login_required 
+def invalid_trip():
+	return render_template('trip.html', name=flask_login.current_user.id, message='invalid trip')
+
+@app.route('/trip', methods=['POST'])
+@flask_login.login_required 
+def add_trip():
+	try:
+		email = flask_login.current_user.id
+		hotel = request.form.get('hotel')
+		restaurant = request.form.get('restaurant')
+		print(email, hotel, restaurant, file=sys.stdout)
+		cursor = conn.cursor()
+		cursor.execute("INSERT INTO Trips (uemail, hotel, restaurant) VALUES (%s, %s, %s )", (email, hotel, restaurant))
+		print('here!', file=sys.stdout)
+		conn.commit()
+		return flask.redirect(flask.url_for('valid_trip'))
+	except:
+		return flask.redirect(flask.url_for('invalid_trip'))
+
 
 
 # start up the backend on port 5000
