@@ -2,8 +2,6 @@ import React, { useEffect, useState }  from 'react';
 import './Currency.css';
 import CurrencyCalc from './CurrencyCalc.js';
 import "./CurrencyCalc.css";
-import ReactDOM from 'react-dom/client';
-import axios from 'axios';
 import {
   BrowserRouter as Router,
   Routes,
@@ -44,8 +42,11 @@ function Currency() {
 class CurrencyCalcLink extends React.Component {
   render() {
       return (
-        <Route path="/" element={<CurrencyCalc/>}></Route>
-
+          <Router>
+              <Routes>
+                  <Route path="/" element={<CurrencyCalc/>}></Route>
+              </Routes>
+          </Router>
       );
   }
 }
