@@ -17,11 +17,11 @@ function Currency() {
   const [getMessage, setGetMessage] = useState({})
 
   return (
+    /* Intro to the page */
     <div className="home">
       <br/>
       <div align="center">
         <div class="col-lg-5">
-          {/* Lables and input for currency data */}
           <h1 class="font-weight-light">Currency Converter</h1>
           <p>
             Here is where you convert currency
@@ -30,7 +30,7 @@ function Currency() {
       </div>
     
       <br/><br/>
-    
+    {/* App link */}
     <div className="container" align="center">
       <CurrencyCalcLink />
     </div>
