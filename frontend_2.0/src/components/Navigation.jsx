@@ -1,0 +1,51 @@
+<<<<<<< HEAD
+=======
+import React from "react";
+import { NavLink } from "react-router-dom";
+
+function Navigation() {
+  return (
+    <div className="navigation">
+      <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <div className="container">
+          <NavLink className="navbar-brand" to="/" >
+            TravelHelper :)
+          </NavLink>
+          <div>
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/">
+                  Home
+                  <span className="sr-only">(current)</span>
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/Signin">
+                  Sign In
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="nav-link" to="/Signup">
+                  Sign Up
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="nav-link" to={"./Currency"}>
+                  Currency
+                </NavLink>
+              </li>
+              <li>
+                <NavLink className="nav-link" to={"./Trips"}>
+                  Trips
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  );
+}
+
+export default Navigation;
+>>>>>>> d606248a35889e34a51e0b7a46f21c622391e3c0
