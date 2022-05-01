@@ -43,11 +43,7 @@ function Currency() {
 class CurrencyCalcLink extends React.Component {
   render() {
       return (
-          <Router>
-              <Routes>
-                  <Route path="/" element={<CurrencyCalc/>}></Route>
-              </Routes>
-          </Router>
+        <CurrencyCalc/>
       );
   }
 }
