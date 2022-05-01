@@ -14,7 +14,7 @@ import CurrencyCalc from './CurrencyCalc.js';
 
 function App() {
   const [getMessage, setGetMessage] = useState({})
-
+/*
   useEffect(()=>{
     axios.get('http://localhost:5000/flask/hello').then(response=> {
       console.log("SUCCESS", response)
@@ -23,7 +23,6 @@ function App() {
       console.log(error)
     })
   }, [])
-
   return (
     <div className="App">
       <header className="App-Header">
@@ -38,7 +37,14 @@ function App() {
         <CurrencyCalcLink/>
       </header>  
     </div>
-  )
+  )*/
+    return (
+        <div className="App">
+            <header className="App-Header">
+                <CurrencyCalcLink />
+            </header>
+        </div>
+    )
 }
 
 class CurrencyCalcLink extends React.Component {
