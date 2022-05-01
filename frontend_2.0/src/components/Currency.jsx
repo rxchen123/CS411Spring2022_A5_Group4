@@ -1,102 +1,53 @@
-import React from 'react';
+import React, { useEffect, useState }  from 'react';
+import './Currency.css';
+import CurrencyCalc from './CurrencyCalc.js';
+import "./CurrencyCalc.css";
+import ReactDOM from 'react-dom/client';
+import axios from 'axios';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+}
+from "react-router-dom";
+
+
 
 function Currency() {
-  
-  /*
-  const
-  
-  
-  */  
-  
-  
-  
-var requestURL = 'https://api.exchangerate.host/latest';
-var request = new XMLHttpRequest();
-request.open('GET', requestURL);
-request.responseType = 'json';
-request.send();
 
-request.onload = function() {
-  var response = request.response;
-  console.log(response);
-}
-  
-  
+  const [getMessage, setGetMessage] = useState({})
+
   return (
-    <div className="Currency">
+    <div className="home">
       <br/>
       <div align="center">
-          <div class="col-lg-5">
-            {/* Lables and input for currency data */}
-            <h1 class="font-weight-light">Currency Converter</h1>
-            <p>
-              Here is where you convert currency
-            </p>
-          </div>
+        <div class="col-lg-5">
+          {/* Lables and input for currency data */}
+          <h1 class="font-weight-light">Currency Converter</h1>
+          <p>
+            Here is where you convert currency
+          </p>
         </div>
+      </div>
     
       <br/><br/>
- 
-      <div class="container" align="center">
-        <v-row>
-
-          <v-col align="center">
-            <form value="currency_input_type" align="center">
-              <label>
-                From:
-              </label>
-              <select>
-                <option currency_input_type="(USD)"> US dollar (USD) </option>
-                <option currency_input_type="(EUR)"> Euro (EUR) </option>
-                <option currency_input_type="(CNH)"> Chinese renminbi (CNH) </option>
-              </select>
-            </form>
-            <form value="currency_input_value" align="center">
-              <label>
-                Input Amount: 
-              </label>
-              <input 
-                type = 'integer'
-                required
-              />
-            </form>
-          </v-col>
-
-        <br/>
-        <br/>
-
-          <v-col align="center">
-
-            <form value="currency_output_type" align="center">
-              <label>
-                To:
-              </label>
-              <select>
-                <option currency_output_type="(USD)"> US dollar (USD) </option>
-                <option currency_output_type="(EUR)"> Euro (EUR) </option>
-                <option currency_output_type="(CNH)"> Chinese renminbi (CNH) </option>
-              </select>
-            </form>
-            <form value="currency_output_value" align="center">
-              <label>
-                Output Amount: 
-              </label>
-              <input
-                type = 'integer'
-                required
-              />
-            </form>
-              
-          </v-col>  
-          
-        </v-row>
-          
-        <button  className="btn" type="submit">
-            Submit
-            </button>
-      </div>
+    
+    <div className="container" align="center">
+      <CurrencyCalcLink />
     </div>
+
+    </div>
+  
   );
+}
+class CurrencyCalcLink extends React.Component {
+  render() {
+      return (
+        <Route path="/" element={<CurrencyCalc/>}></Route>
+
+      );
+  }
 }
 
 export default Currency;

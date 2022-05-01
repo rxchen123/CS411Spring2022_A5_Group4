@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 import React from "react";
 import { NavLink } from "react-router-dom";
 
@@ -48,4 +46,3 @@ function Navigation() {
 }
 
 export default Navigation;
->>>>>>> d606248a35889e34a51e0b7a46f21c622391e3c0
