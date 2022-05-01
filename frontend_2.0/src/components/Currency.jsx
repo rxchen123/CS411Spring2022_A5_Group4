@@ -18,11 +18,11 @@ function Currency() {
 
   return (
     /* Intro to the page */
-    <div className="home">
+    <div>
       <br/>
       <div align="center">
-        <div class="col-lg-5">
-          <h1 class="font-weight-light">Currency Converter</h1>
+        <div >
+          <h1 >Currency Converter</h1>
           <p>
             Here is where you convert currency
           </p>
@@ -30,11 +30,12 @@ function Currency() {
       </div>
     
       <br/><br/>
+
     {/* App link */}
     <div className="container" align="center">
-      <CurrencyCalcLink />
+      
     </div>
-
+      <CurrencyCalcLink />
     </div>
   
   );
