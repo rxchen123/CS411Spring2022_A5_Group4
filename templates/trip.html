@@ -4,7 +4,7 @@
 <body>
     {% if name %}
     {% if message %}
-        <h4>It looks like this trip already exists!</h4>
+        <h4>{{message}}</h4>
     {% endif %}
     <h1>Create a Trip!</h1>
     <div id="trip">
@@ -16,11 +16,23 @@
             <input type="submit"/>
         </form>
     </div>
+    <div>
+        <h2>YOUR TRIPS:</h2>
+        {% if trips %}
+            {% for trip in trips %}
+            <li>
+                <h4>Hotel: {{trip[0]}}, Restaurant: {{trip[1]}}</h4>
+            </li>
+            {% endfor %}
+        {% else %}
+            <h4>You have no trips!</h4>
+        {% endif %}
+    </div>
     <ul>
         <li><a href='/home'>Home</a></li>
         <li><a href='/profile'>Profile</a> </li>
         <li><a href='/logout'>Logout</a> </li>
-      </ul>
+    </ul>
     {% else %}
     <h1>You are logged out.</h1>
     <ul>

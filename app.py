@@ -157,14 +157,6 @@ def register_user():
 		print("couldn't find all tokens")
 		return flask.redirect(flask.url_for('bad_email'))
 
-
-def getUserTrips(email):
-	""" get all of a user's trips """
-
-	cursor = conn.cursor()
-	cursor.execute("SELECT hotel, restaurant FROM Trips WHERE uemail = '{0}'".format(email))
-	return cursor.fetchall() # note: return a list of tuples, [(budget, source, destination), ...]
-
 def isEmailUnique(email):
 	""" check if a user has already registered an email """
 
@@ -199,23 +191,26 @@ def logout():
 def profile():
 	return render_template('profile.html', name=flask_login.current_user.id)
 
-
 # render the trips page (must be logged in) 
 @app.route('/trip', methods=['GET'])
 @flask_login.login_required 
 def trip():
-	return render_template('trip.html', name=flask_login.current_user.id)
+	email = flask_login.current_user.id
+	print(getTrips(email), file=sys.stdout)
+	return render_template('trip.html', name=email, trips=getTrips(email))
 
 @app.route('/valid-trip', methods=['GET'])
 @flask_login.login_required 
 def valid_trip():
-	return render_template('trip.html', name=flask_login.current_user.id, message='Trip created!')
+	email = flask_login.current_user.id
+	return render_template('trip.html', name=email, trips=getTrips(email), message='Trip created!')
 
 
 @app.route('/invalid-trip', methods=['GET'])
 @flask_login.login_required 
 def invalid_trip():
-	return render_template('trip.html', name=flask_login.current_user.id, message='invalid trip')
+	email = flask_login.current_user.id
+	return render_template('trip.html', name=email, trips=getTrips(email), message='It looks like this trip already exists!')
 
 @app.route('/trip', methods=['POST'])
 @flask_login.login_required 
@@ -224,16 +219,21 @@ def add_trip():
 		email = flask_login.current_user.id
 		hotel = request.form.get('hotel')
 		restaurant = request.form.get('restaurant')
-		print(email, hotel, restaurant, file=sys.stdout)
 		cursor = conn.cursor()
 		cursor.execute("INSERT INTO Trips (uemail, hotel, restaurant) VALUES (%s, %s, %s )", (email, hotel, restaurant))
-		print('here!', file=sys.stdout)
+		print("INSERTED (%s, %s, %s) into TRIPS"%(email, hotel, restaurant), file=sys.stdout)
 		conn.commit()
 		return flask.redirect(flask.url_for('valid_trip'))
 	except:
 		return flask.redirect(flask.url_for('invalid_trip'))
 
 
+def getTrips(email):
+	""" get all of a user's trips """
+
+	cursor = conn.cursor()
+	cursor.execute("SELECT hotel, restaurant FROM Trips WHERE uemail = '{0}'".format(email))
+	return cursor.fetchall() # note: return a list of tuples, [(hotel, restaurant)]
 
 # start up the backend on port 5000
 if __name__ == "__main__":
