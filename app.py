@@ -176,7 +176,7 @@ def protected():
 # render the home page when not logged in
 @app.route("/", methods=['GET'])
 def hello():
-	return render_template('index.html', message='Welecome to TravelHelper!')
+	return render_template('index.html', message='Welcome to TravelHelper!')
 
 # logout and render the post-log-out home page
 @app.route('/logout')
