@@ -6,7 +6,7 @@
 # 			   https://flask-login.readthedocs.io/en/latest/		          #
 ###############################################################################
 
-from crypt import methods
+#from crypt import methods
 import flask
 from flask import Flask, Response, request, render_template, redirect, url_for
 from flaskext.mysql import MySQL
@@ -21,6 +21,7 @@ app.secret_key = 'secret!!'
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = ''
 app.config['MYSQL_DATABASE_DB'] = 'travelhelper'
+#app.config['MYSQL_DATABASE_HOST'] = '127.0.0.1'
 app.config['MYSQL_DATABASE_HOST'] = 'localhost'
 mysql.init_app(app)
 
