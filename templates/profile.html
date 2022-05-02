@@ -1,22 +1,29 @@
 <!doctype html>
-<title>TravelHelper</title>
+<head>
+  <title>TravelHelper</title>
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='style.css')}}">
+</head>
+
+<body class="container">
+  
 {% if name %}
   <h1>User: {{ name }}</h1>
   <h1>Change Password: TBA</h1>
   <ul>
-    <li><a href='/home'>Home</a></li>
-    <li><a href='/trip'>Trips</a> </li>
-    <li><a href='/logout'>Logout</a> </li>
-
-
+    <li><a href='/home' class="btn">Home</a></li>
+    <li><a href='/trip' class="btn">Trips</a> </li>
+    <li><a href='/logout' class="btn">Logout</a> </li>
   </ul>
 {% else %}
   <h1>You are logged out.</h1>
   <ul>
-    <li><a href='/'>Home</a></li>
-    <li><a href='/login'>Login</a> </li>
-    <li><a href='/register'>Register</a></li>
+    <li><a href='/' class="btn">Home</a></li>
+    <li><a href='/login' class="btn">Login</a> </li>
+    <li><a href='/register' class="btn">Register</a></li>
   </ul>
 {% endif %}
+
+</body>
+
 
 

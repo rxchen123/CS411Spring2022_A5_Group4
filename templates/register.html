@@ -1,20 +1,31 @@
 <!doctype html>
-<title>TravelHelper</title>
+<head>
+    <title>TravelHelper</title>
+    <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='style.css')}}">
+</head>
+
 {%if message%}
 <h4> {{message}} </h4>
 {% endif %}
 <body>
-    <div class="title">
-        <h1> Create an Account </h1>
+    <div class="login">
+        <div id="content" class = "content">
+            <h1> Create an Account </h1>
+            <form method="post" action="{{ url_for('register_user') }}">
+                <div class="txt">
+                    <label for="email">email:</label>
+                    <input type="text" name="email"/><br/>
+                    <label for="password">password:</label>
+                    <input type="password" name="password"/><br/>
+                </div>
+                <input type="submit"/>
+            </form>
+
+            <div class="home">
+                <h1><a href='/' class="btn">Home</a></h1>
+            </div>
+        </div>
+
     </div>
-    <div id="content">
-        <form method="post" action="{{ url_for('register_user') }}">
-            <label for="email">email:</label>
-            <input type="text" name="email"/><br/>
-            <label for="password">password:</label>
-            <input type="password" name="password"/><br/>
-            <input type="submit"/>
-        </form>
-    </div>
+
 </body>
-<h1><a href='/'>Home</a></h1>
