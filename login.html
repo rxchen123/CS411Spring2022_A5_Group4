@@ -1,0 +1,28 @@
+<head>
+    <title>TravelHelper</title>
+    <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='style.css')}}">
+</head>
+{% if message %}
+  <h4>{{message}}</h4>
+{% endif %}
+<body>
+    <div class="login">
+        <div id="content">
+            <h1> Login </h1>
+            <form action='login' method='POST' action="{{ url_for('login') }}" >            
+                <label for="email">Enter Email:</label>
+                <input type='text' name='email' id='email' placeholder='email'></input></br>
+                <label for="password">Enter Password:</label>
+                <input type='password' name='password' id='password' placeholder='password'></input><br/>
+                <input type='submit' name='submit'></input>
+            </form></br>
+        </div>
+
+        <div class="home">
+            <h1><a href='/' class="btn">Home</a></h1>
+        </div>
+    </div>
+
+
+
+</body>

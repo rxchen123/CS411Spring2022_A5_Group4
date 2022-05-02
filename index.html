@@ -1,0 +1,40 @@
+<!doctype html>
+<head>
+  <title>TravelHelper</title>
+  <link rel="stylesheet" type = "text/css" href="{{ url_for('static', filename='style.css')}}">
+</head>
+<body>
+  <div class="container">
+    <div class="navbar">
+      <!-- <img src="{{ url_for('static', filename='images/seaside.png')}}" class="background-img"> -->
+      <img src="{{ url_for('static', filename='images/flight.png')}}" class="logo">
+      {% if message %}
+        <div class="msg">
+          <h4>{{message}}</h4>
+        </div>
+      {% endif %}
+      {% if name %}
+        <h1>You are logged in as: {{ name }}</h1>
+        <nav>
+          <ul>
+            <li><a href='/profile' type="button" class="btn">Profile</a></li>
+            <li><a href='/trip' type="button" class="btn">Trips</a></li>
+            <li><a href='/logout' type="button" class="btn">Logout</a></li>
+          </ul>
+        </nav>
+      {% else %}
+        {%if logout%}
+          <h1><a href='/'>Home</a></h1>
+        {% else %}
+          <nav>
+            <ul>
+              <li><a href='/login' type="button" class="btn">Login</a></li>
+              <li><a href='/register' type="button" class="btn">Register</a></li>
+          </nav>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+
+</body>
+
