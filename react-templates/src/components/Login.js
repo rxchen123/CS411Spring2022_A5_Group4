@@ -7,9 +7,8 @@ class Login extends React.Component {
         <title>TravelHelper</title>
         {"{"}% if message %{"}"}
         <h4>
-          {"{"}
-          {"{"}message{"}"}
-          {"}"}
+            {/*{{message}}*/}
+            {/*<Attribute message = '{{message}}'/>*/}
         </h4>
         {"{"}% endif %{"}"}
         <div className="title">
