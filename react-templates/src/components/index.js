@@ -6,6 +6,7 @@ import axios from 'axios';
 require('react-dom');
 window.React2 = require('react');
 console.log(window.React1 === window.React2);
+console.log("test")
 
 //grab from sql
 //message, name, logout
@@ -14,7 +15,7 @@ function SqlMessage() {
     const [getMessage, setGetMessage] = useState({})
 
     useEffect(() => {
-        axios.get('http://localhost:5000').then(response => {
+        axios.get('http://localhost:5000/').then(response => {
         console.log("SUCCESS", response)
         setGetMessage(response)
         }).catch(error => {
@@ -58,12 +59,12 @@ class Home extends React.Component {
             {/*{"{"}% else %{"}"}*/}           
             {/*{"{"}%if logout%{"}"}*/}
         <h1>
-          <a href="/">Home</a>
-            </h1>
+        <a href="/">Home</a>
+        </h1>
             {/*if we don't have a message*/}
             {/*{"{"}% else %{"}"}*/}
         <h1>
-          <a href="/login">Login</a>
+        <a href="/login">Login</a>
         </h1>
         <h1>
           <a href="/register">Register</a>

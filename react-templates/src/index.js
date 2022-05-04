@@ -12,6 +12,8 @@ import Register from "./components/Register";
 import Trip from "./components/Trip";
 import Unauth from "./components/Unauth";
 
+
+
 //<Navigation />
 //<Footer />
 

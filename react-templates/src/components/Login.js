@@ -1,42 +1,72 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-class Login extends React.Component {
-  render() {
+//props not needed w/out token
+function Login() {
+
+    const [loginForm, setloginForm] = useState({
+        email: "",
+        password: ""
+    })
+
+    function logMeIn(event) {
+        axios({
+            method: "POST",
+            url: "http://localhost:5000/login",
+            data: {
+                email: loginForm.email,
+                password: loginForm.password
+            }
+        })
+            .then(response => {
+                console.log("test");
+                console.log(response);
+            })
+            .catch((error) => {
+                if (error.response) {
+                    console.log(error.response)
+                    console.log(error.response.status)
+                    console.log(error.response.headers)
+                }
+            })
+
+        setloginForm(({
+            email: "",
+            password: ""
+        }))
+
+        event.preventDefault()
+    }
+
+    function handleChange(event) {
+        const { value, name } = event.target
+        setloginForm(prevNote => ({
+            ...prevNote, [name]: value
+        })
+        )
+    }
+            
     return (
-      <div>
-        <title>TravelHelper</title>
-        {"{"}% if message %{"}"}
-        <h4>
-            {/*{{message}}*/}
-            {/*<Attribute message = '{{message}}'/>*/}
-        </h4>
-        {"{"}% endif %{"}"}
-        <div className="title">
-          <h1> Login </h1>
+        <div>
+            <h1>Login</h1>
+            <form className="login">
+                <input onChange={handleChange}
+                    type="email"
+                    text={loginForm.email}
+                    name="email"
+                    placeholder="Email"
+                    value={loginForm.email} />
+                <input onChange={handleChange}
+                    type="password"
+                    text={loginForm.password}
+                    name="password"
+                    placeholder="Password"
+                    value={loginForm.password} />
+
+                <button onClick={logMeIn}>Submit</button>
+            </form>
         </div>
-        <div id="content">
-          <form action="login" method="POST">
-            <label htmlFor="email">enter email:</label>
-            <input type="text" name="email" id="email" placeholder="email" />
-            <br />
-            <label htmlFor="password">enter password:</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="password"
-            />
-            <br />
-            <input type="submit" name="submit" />
-          </form>
-        </div>
-        <br />
-        <h1>
-          <a href="/">Home</a>
-        </h1>
-      </div>
     );
-  }
 }
 
 export default Login;

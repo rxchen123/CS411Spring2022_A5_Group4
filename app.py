@@ -8,14 +8,18 @@
 
 #from crypt import methods
 import flask
-from flask import Flask, Response, request, render_template, redirect, url_for
+import json
+from flask import Flask, Response, request, render_template, redirect, url_for, jsonify
 from flaskext.mysql import MySQL
 import flask_login
 import sys
+from flask_cors import CORS, cross_origin
 
 mysql = MySQL()
 app = Flask(__name__)
 app.secret_key = 'secret!!'  
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # connecting Flask with MySQL
 app.config['MYSQL_DATABASE_USER'] = 'root'
@@ -45,12 +49,13 @@ def getUserList():
 	return cursor.fetchall()
 
 
-# default User class (inherits from User.Mixin with default implementations)
+# default User class (inherits from User.Mixin with default implementations of fields/methods)
 class User(flask_login.UserMixin):
 	pass
 
-# user loader callback: reloads user object from user-id stored in session 
-# (essentially a 're-login' but to the user it looks like they are in a sesions)
+# user loader callback: reloads user object from user-id stored in the session.
+# (essentially a 're-login' but to the user it looks like they are in a sesion)
+# must take in a string id of a user and return the corresponding user object
 @login_manager.user_loader
 def user_loader(email):
 	global users
@@ -61,12 +66,12 @@ def user_loader(email):
 	user.id = email
 	return user
 
-# handle unauthorized actions (shouldn't see this usually, session timeouts maybe?? NOT SURE)
-@login_manager.unauthorized_handler
-def unauthorized_handler():
-	return render_template('unauth.html')
+#handle unauthorized actions (shouldn't see this usually, session timeouts maybe?? NOT SURE)
+#@login_manager.unauthorized_handler
+#def unauthorized_handler():
+#	return render_template('unauth.html')
 
-# reuqest loader: for regular logins without cookies
+# reuqest loader: for logins without cookies (e.g. the initial login from a login form)
 @login_manager.request_loader
 def request_loader(request):
 	global users
@@ -83,44 +88,66 @@ def request_loader(request):
 	user.is_authenticated = request.form['password'] == pwd
 	return user
 
-@app.route('/login', methods=['GET', 'POST'])
+"""
+@app.route('/login', methods=['GET'])
 def login():
 	if flask.request.method == 'GET':
 		return render_template('login.html')
-		
-	else: # request method is POST 
-		email = flask.request.form['email']
-		cursor = conn.cursor()
-		
-		# check if email is registered
-		if cursor.execute("SELECT password FROM Users WHERE email = '{0}'".format(email)):
-			data = cursor.fetchall()
-			pwd = str(data[0][0])
+"""
+
+@app.route('/login', methods=['POST'])
+def login():
+	#email = flask.request.form['email'] #this works from HTML. Does this work with react??
+	cursor = conn.cursor()
+    #password = request.json.get("password",None)
+	# check if email is registered
+	email = request.json.get("email",None)
+    #password = request.json.get("password",None)
+	if cursor.execute("SELECT password FROM Users WHERE email = '{0}'".format(email)):
+		data = cursor.fetchall()
+		pwd = str(data[0][0])
 			
-			if flask.request.form['password'] == pwd:
-				user = User()
-				user.id = email
-				flask_login.login_user(user) # password is correct, login the user
-				#re-direct user to logged-in version of the home page
-				return flask.redirect(flask.url_for('protected')) # protected is a function defined in this file
+		if request.json.get("password",None) == pwd: # same issue as last request.form query
+			user = User()
+			user.id = email
+			flask_login.login_user(user) # password is correct, login the user
+
+			return {
+        		'email' : email,
+				'login' : 1, 
+				'message': 'Successful login.'
+    		}			
+			# code below re-directs user to logged-in version of the home page
+			# return flask.redirect(flask.url_for('protected')) # protected is a function defined in this file
 
 	# information did not match
-	return render_template("login.html", message='Please try again.')
+	return {
+        'email' : email,
+		'login' : 0, 
+		'message': 'Please try again.'
+    }	
+	# return render_template("login.html", message='Please try again.')
 	
 # specific methods (GET/POST) can be specified in the function header instead of inside the functions 
+"""
 @app.route("/register", methods=['GET'])
 def register():
 	return render_template('register.html')
+"""
 
-# handle a normal failed registration  
+# handle a normal failed registration
+"""  
 @app.route("/re-register", methods=['GET'])
 def re_register():
 	return render_template('register.html', message='Please try again.')
+"""
 
 # handle a failed registration because of an invalid email 
+"""
 @app.route("/bad-email", methods=['GET'])
 def bad_email():
 	return render_template('register.html', message='Email in use! Please try again.')
+"""
 
 @app.route("/register", methods=['POST'])
 def register_user():
@@ -132,11 +159,24 @@ def register_user():
 
 		if len(password) < 1 or len(email) < 1:
 			print('invalid email and/or password')
+
+			return {
+        		'email' : '',
+				'register' : 0, 
+				'message': 'invalid email and/or password.'
+    		}	
+
 			# can't render_template here after failed login, must use redirect. Not sure why.
-			return flask.redirect(flask.url_for('re_register'))
+			# return flask.redirect(flask.url_for('re_register'))
 	except:
 		print("couldn't find all tokens") # all print statements go to shell (invisible to user)
-		return flask.redirect(flask.url_for('re_register'))
+
+		return {
+        	'email' : '',
+			'register' : 0, 
+			'message': 'couldn\'t find all tokens'
+    	}	
+		# return flask.redirect(flask.url_for('re_register'))
 
 	cursor = conn.cursor()
 	test = isEmailUnique(email)
@@ -146,17 +186,25 @@ def register_user():
 		print(cursor.execute("INSERT INTO Users (email, password) VALUES ('{0}', '{1}')".format(email, password)))
 		conn.commit()
 
-		# successful registration, log the user in and redirect to the home page
+		# successful registration, log the user in 
 		user = User()
 		user.id = email
 		flask_login.login_user(user)
-		# but I can render template here after a successful registration? Not sure why. (See above for context)
-		return render_template('index.html', name=email, message='Account Created!')
-
+		
+		# return render_template('index.html', name=email, message='Account Created!')
+		return {
+        	'email' : email,
+			'register' : 1, 
+			'message': 'Account created!'
+    	}	
 	# email is already in use
 	else:
-		print("couldn't find all tokens")
-		return flask.redirect(flask.url_for('bad_email'))
+		print("bad email")
+		return {
+        	'email' : '',
+			'register' : 0, 
+			'message': 'Email already in use! Please try again.' 
+    	}	
 
 def isEmailUnique(email):
 	""" check if a user has already registered an email """
@@ -173,24 +221,35 @@ def isEmailUnique(email):
 @app.route('/home')
 @flask_login.login_required # this decorator specifies that /home requires users to be logged in
 def protected():
-	return render_template('index.html', name=flask_login.current_user.id)
+	email = flask_login.current_user.id
+	return {
+        'email' : email
+    }	
 
 # render the home page when not logged in
+"""
 @app.route("/", methods=['GET'])
 def hello():
 	return render_template('index.html', message='Welecome to TravelHelper!')
+"""
 
 # logout and render the post-log-out home page
 @app.route('/logout')
 def logout():
 	flask_login.logout_user() # logout 
-	return render_template('index.html', message='Successfully Logged Out', logout=True)
-
-# render the profile page (must be logged in) 
+	return {
+		'message': 'Successfully logged out!'
+    }	
+	# return render_template('index.html', message='Successfully Logged Out', logout=True)
+ 
 @app.route('/profile')
-@flask_login.login_required # this decorator specifies that /home requires users to be logged in
+@flask_login.login_required # this decorator specifies that /profile requires users to be logged in
 def profile():
-	return render_template('profile.html', name=flask_login.current_user.id)
+	email = flask_login.current_user.id
+	return {
+        'email' : email,
+    }	
+	# return render_template('profile.html', name=email)
 
 # render the trips page (must be logged in) 
 @app.route('/trip', methods=['GET'])
@@ -198,20 +257,27 @@ def profile():
 def trip():
 	email = flask_login.current_user.id
 	print(getTrips(email), file=sys.stdout)
-	return render_template('trip.html', name=email, trips=getTrips(email))
+	return {
+        'email' : email,
+		'trips': getTrips(email)
+    }	
+	# return render_template('trip.html', name=email, trips=getTrips(email))
 
+"""
 @app.route('/valid-trip', methods=['GET'])
 @flask_login.login_required 
 def valid_trip():
-	email = flask_login.current_user.id
+	email = flask_login.current_user.id	
 	return render_template('trip.html', name=email, trips=getTrips(email), message='Trip created!')
+"""
 
-
+"""
 @app.route('/invalid-trip', methods=['GET'])
 @flask_login.login_required 
 def invalid_trip():
 	email = flask_login.current_user.id
 	return render_template('trip.html', name=email, trips=getTrips(email), message='It looks like this trip already exists!')
+"""
 
 @app.route('/trip', methods=['POST'])
 @flask_login.login_required 
@@ -224,9 +290,19 @@ def add_trip():
 		cursor.execute("INSERT INTO Trips (uemail, hotel, restaurant) VALUES (%s, %s, %s )", (email, hotel, restaurant))
 		print("INSERTED (%s, %s, %s) into TRIPS"%(email, hotel, restaurant), file=sys.stdout)
 		conn.commit()
-		return flask.redirect(flask.url_for('valid_trip'))
+		return {
+    		'email' : email,
+			'trips': getTrips(email),
+			'message' : 'Trip created!'
+    	}	
+		# return flask.redirect(flask.url_for('valid_trip'))
 	except:
-		return flask.redirect(flask.url_for('invalid_trip'))
+		return {
+    		'email' : email,
+			'trips': getTrips(email),
+			'message' : 'It looks like this trip already exists!'
+    	}
+		# return flask.redirect(flask.url_for('invalid_trip'))
 
 
 def getTrips(email):
