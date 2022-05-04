@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+
 //props not needed w/out token
 function Login() {
 
@@ -19,7 +20,6 @@ function Login() {
             }
         })
             .then(response => {
-                console.log("test");
                 console.log(response);
             })
             .catch((error) => {
@@ -37,7 +37,7 @@ function Login() {
 
         event.preventDefault()
     }
-
+    
     function handleChange(event) {
         const { value, name } = event.target
         setloginForm(prevNote => ({
@@ -49,6 +49,7 @@ function Login() {
     return (
         <div>
             <h1>Login</h1>
+            <p></p>
             <form className="login">
                 <input onChange={handleChange}
                     type="email"

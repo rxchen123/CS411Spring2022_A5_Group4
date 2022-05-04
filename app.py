@@ -15,6 +15,12 @@ import flask_login
 import sys
 from flask_cors import CORS, cross_origin
 
+#flask_jwt_extended; tokens for logging in and out
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+
 mysql = MySQL()
 app = Flask(__name__)
 app.secret_key = 'secret!!'  
@@ -40,6 +46,10 @@ cursor = conn.cursor()
 # fetch an initial list of all users
 cursor.execute("SELECT email from Users")
 users = cursor.fetchall()
+
+#initialize jwt manager
+app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
+jwt = JWTManager(app)
 
 def getUserList():
 	""" return a list of of all the users """
@@ -76,7 +86,8 @@ def user_loader(email):
 def request_loader(request):
 	global users
 	users = getUserList()
-	email = request.form.get('email')
+	#email = request.form.get('email')
+	email = request.json.get('email',None)
 	if not(email) or email not in str(users):
 		return
 	user = User()
@@ -115,7 +126,8 @@ def login():
 			return {
         		'email' : email,
 				'login' : 1, 
-				'message': 'Successful login.'
+				'message': 'Successful login.',
+				'access_token': create_access_token(identity=email)
     		}			
 			# code below re-directs user to logged-in version of the home page
 			# return flask.redirect(flask.url_for('protected')) # protected is a function defined in this file
@@ -154,8 +166,8 @@ def register_user():
 	global users
 	users = getUserList()
 	try:
-		email=request.form.get('email')
-		password=request.form.get('password')
+		email=request.json.get("email",None)
+		password=request.json.get("password",None)
 
 		if len(password) < 1 or len(email) < 1:
 			print('invalid email and/or password')
@@ -283,9 +295,9 @@ def invalid_trip():
 @flask_login.login_required 
 def add_trip():
 	try:
-		email = flask_login.current_user.id
-		hotel = request.form.get('hotel')
-		restaurant = request.form.get('restaurant')
+		email = request.json.get("email",None)
+		hotel = request.json.get("hotel",None)
+		restaurant = response.json.get('restaurant')
 		cursor = conn.cursor()
 		cursor.execute("INSERT INTO Trips (uemail, hotel, restaurant) VALUES (%s, %s, %s )", (email, hotel, restaurant))
 		print("INSERTED (%s, %s, %s) into TRIPS"%(email, hotel, restaurant), file=sys.stdout)
