@@ -1,0 +1,53 @@
+.App {
+    text-align: center;
+    font-family: Didot;
+    background-color:green;
+    }
+    
+    .label{
+        display: block;
+        font-family: 'Didot';
+        font-size: larger;
+        color: rgb(0, 0, 0);
+    }
+    
+    .input{
+        font-size: larger;
+        padding: 5px;
+        margin: 2px;
+        
+    }
+    .btn{
+        font-family: Didot;
+        margin-top: 10px;
+        cursor: pointer;
+        color: white;
+        background-color: red;
+        border-radius: 5px;
+        font-size: larger;
+        display: block;
+        padding: 10px;
+    }
+    
+    .messages{
+        display: flex;
+        justify-content: center;
+    }
+    
+    .error{
+        display: block;
+        background-color: red;
+        color: white;
+        width: fit-content;
+        height: 50px;
+        padding: 5px;
+    }
+    
+    .success{
+        display: block;
+        background-color: lightblue;
+        color: black;
+        width: fit-content;
+        height: 50px;
+        padding: 5px;
+    }
