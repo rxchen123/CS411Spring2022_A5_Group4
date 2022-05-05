@@ -5,3 +5,5 @@ Flask-SQLAlchemy
 requests
 Werkzeug
 cryptography
+flask-jwt-extended
+flask-cors

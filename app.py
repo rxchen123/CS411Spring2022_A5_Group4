@@ -6,7 +6,6 @@
 # 			   https://flask-login.readthedocs.io/en/latest/		          #
 ###############################################################################
 
-#from crypt import methods
 import flask
 import json
 from flask import Flask, Response, request, render_template, redirect, url_for, jsonify
@@ -15,11 +14,12 @@ import flask_login
 import sys
 from flask_cors import CORS, cross_origin
 
-#flask_jwt_extended; tokens for logging in and out
+#flask_jwt_extended: tokens for logging in and out
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
+from flask_jwt_extended import unset_jwt_cookies
 
 mysql = MySQL()
 app = Flask(__name__)
@@ -47,8 +47,8 @@ cursor = conn.cursor()
 cursor.execute("SELECT email from Users")
 users = cursor.fetchall()
 
-#initialize jwt manager
-app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
+# initialize jwt manager
+app.config["JWT_SECRET_KEY"] = "super-secret"  
 jwt = JWTManager(app)
 
 def getUserList():
@@ -86,7 +86,6 @@ def user_loader(email):
 def request_loader(request):
 	global users
 	users = getUserList()
-	#email = request.form.get('email')
 	email = request.json.get('email',None)
 	if not(email) or email not in str(users):
 		return
@@ -99,29 +98,20 @@ def request_loader(request):
 	user.is_authenticated = request.form['password'] == pwd
 	return user
 
-"""
-@app.route('/login', methods=['GET'])
-def login():
-	if flask.request.method == 'GET':
-		return render_template('login.html')
-"""
-
 @app.route('/login', methods=['POST'])
 def login():
-	#email = flask.request.form['email'] #this works from HTML. Does this work with react??
 	cursor = conn.cursor()
-    #password = request.json.get("password",None)
 	# check if email is registered
-	email = request.json.get("email",None)
-    #password = request.json.get("password",None)
+
+	email = request.json.get("email", None)
 	if cursor.execute("SELECT password FROM Users WHERE email = '{0}'".format(email)):
 		data = cursor.fetchall()
 		pwd = str(data[0][0])
 			
-		if request.json.get("password",None) == pwd: # same issue as last request.form query
-			user = User()
-			user.id = email
-			flask_login.login_user(user) # password is correct, login the user
+		if request.json.get("password",None) == pwd:
+			# user = User()
+			# user.id = email
+			# flask_login.login_user(user) # (DO WE NEED THIS STILL?)
 
 			return {
         		'email' : email,
@@ -129,38 +119,14 @@ def login():
 				'message': 'Successful login.',
 				'access_token': create_access_token(identity=email)
     		}			
-			# code below re-directs user to logged-in version of the home page
-			# return flask.redirect(flask.url_for('protected')) # protected is a function defined in this file
 
 	# information did not match
 	return {
         'email' : email,
 		'login' : 0, 
-		'message': 'Please try again.'
-    }	
-	# return render_template("login.html", message='Please try again.')
+		'message': 'Please try again.',
+	}, 401
 	
-# specific methods (GET/POST) can be specified in the function header instead of inside the functions 
-"""
-@app.route("/register", methods=['GET'])
-def register():
-	return render_template('register.html')
-"""
-
-# handle a normal failed registration
-"""  
-@app.route("/re-register", methods=['GET'])
-def re_register():
-	return render_template('register.html', message='Please try again.')
-"""
-
-# handle a failed registration because of an invalid email 
-"""
-@app.route("/bad-email", methods=['GET'])
-def bad_email():
-	return render_template('register.html', message='Email in use! Please try again.')
-"""
-
 @app.route("/register", methods=['POST'])
 def register_user():
 	global users
@@ -177,9 +143,6 @@ def register_user():
 				'register' : 0, 
 				'message': 'invalid email and/or password.'
     		}	
-
-			# can't render_template here after failed login, must use redirect. Not sure why.
-			# return flask.redirect(flask.url_for('re_register'))
 	except:
 		print("couldn't find all tokens") # all print statements go to shell (invisible to user)
 
@@ -188,7 +151,6 @@ def register_user():
 			'register' : 0, 
 			'message': 'couldn\'t find all tokens'
     	}	
-		# return flask.redirect(flask.url_for('re_register'))
 
 	cursor = conn.cursor()
 	test = isEmailUnique(email)
@@ -201,13 +163,13 @@ def register_user():
 		# successful registration, log the user in 
 		user = User()
 		user.id = email
-		flask_login.login_user(user)
+		# flask_login.login_user(user)
 		
-		# return render_template('index.html', name=email, message='Account Created!')
 		return {
         	'email' : email,
 			'register' : 1, 
-			'message': 'Account created!'
+			'message': 'Account created!',
+			'access_token': create_access_token(identity=email)
     	}	
 	# email is already in use
 	else:
@@ -231,43 +193,39 @@ def isEmailUnique(email):
 
 # render the home page when logged in
 @app.route('/home')
-@flask_login.login_required # this decorator specifies that /home requires users to be logged in
+# @flask_login.login_required # this decorator specifies that /home requires users to be logged in
+@jwt_required()
 def protected():
-	email = flask_login.current_user.id
+	email = get_jwt_identity()
 	return {
         'email' : email
-    }	
-
-# render the home page when not logged in
-"""
-@app.route("/", methods=['GET'])
-def hello():
-	return render_template('index.html', message='Welecome to TravelHelper!')
-"""
+    }, 200	
 
 # logout and render the post-log-out home page
 @app.route('/logout')
 def logout():
-	flask_login.logout_user() # logout 
-	return {
+	# flask_login.logout_user() # STILL NEEDED? 
+	response = {
 		'message': 'Successfully logged out!'
     }	
-	# return render_template('index.html', message='Successfully Logged Out', logout=True)
+	unset_jwt_cookies(response)
+	return response
  
 @app.route('/profile')
-@flask_login.login_required # this decorator specifies that /profile requires users to be logged in
+# @flask_login.login_required # this decorator specifies that /profile requires users to be logged in
+@jwt_required()
 def profile():
-	email = flask_login.current_user.id
+	email = get_jwt_identity()
 	return {
         'email' : email,
     }	
-	# return render_template('profile.html', name=email)
 
-# render the trips page (must be logged in) 
 @app.route('/trip', methods=['GET'])
-@flask_login.login_required 
+# @flask_login.login_required NOT NEEDED
+@jwt_required()
 def trip():
-	email = flask_login.current_user.id
+	# email = flask_login.current_user.id # NOT NEEDED
+	email = get_jwt_identity() # This should work!!
 	print(getTrips(email), file=sys.stdout)
 	return {
         'email' : email,
@@ -275,29 +233,15 @@ def trip():
     }	
 	# return render_template('trip.html', name=email, trips=getTrips(email))
 
-"""
-@app.route('/valid-trip', methods=['GET'])
-@flask_login.login_required 
-def valid_trip():
-	email = flask_login.current_user.id	
-	return render_template('trip.html', name=email, trips=getTrips(email), message='Trip created!')
-"""
-
-"""
-@app.route('/invalid-trip', methods=['GET'])
-@flask_login.login_required 
-def invalid_trip():
-	email = flask_login.current_user.id
-	return render_template('trip.html', name=email, trips=getTrips(email), message='It looks like this trip already exists!')
-"""
-
 @app.route('/trip', methods=['POST'])
-@flask_login.login_required 
+# @flask_login.login_required NOT NEEDED
+@jwt_required()
 def add_trip():
 	try:
-		email = request.json.get("email",None)
-		hotel = request.json.get("hotel",None)
-		restaurant = response.json.get('restaurant')
+		# email = request.json.get("email", None)
+		email = get_jwt_identity()
+		hotel = request.json.get("hotel", None)
+		restaurant = request.json.get('restaurant', None)
 		cursor = conn.cursor()
 		cursor.execute("INSERT INTO Trips (uemail, hotel, restaurant) VALUES (%s, %s, %s )", (email, hotel, restaurant))
 		print("INSERTED (%s, %s, %s) into TRIPS"%(email, hotel, restaurant), file=sys.stdout)
@@ -307,14 +251,12 @@ def add_trip():
 			'trips': getTrips(email),
 			'message' : 'Trip created!'
     	}	
-		# return flask.redirect(flask.url_for('valid_trip'))
 	except:
 		return {
     		'email' : email,
 			'trips': getTrips(email),
 			'message' : 'It looks like this trip already exists!'
     	}
-		# return flask.redirect(flask.url_for('invalid_trip'))
 
 
 def getTrips(email):
