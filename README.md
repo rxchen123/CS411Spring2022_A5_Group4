@@ -6,10 +6,12 @@ CS411 Project, Spring 2022, Lab A5 Group 4
 
 1. Install [XAMPP](https://www.apachefriends.org/index.html)
 2. Launch XAMPP. Under the 'My Servers' Tab, start  'MySQL Database' as well as 'Apache Web Server'
-3. Go to [http://localhost:80](http://localhost:3000)
-4. Navigate to 'phpMyAdmin' (located in the menu bar on the top right of the page)
-5. Go to the 'SQL' tab
-6. Copy and paste everything from schema.sql into the 'query box' and run the commands. Don't forget to click go. 
+3. ![](readme-img/xampp.png)
+
+4. Go to [http://localhost:80](http://localhost:3000)
+5. Navigate to 'phpMyAdmin' (located in the menu bar on the top right of the page)
+6. Go to the 'SQL' tab
+7. Copy and paste everything from schema.sql into the 'query box' and run the commands. Don't forget to click go. 
 
 [additional help](https://www.askpython.com/python-modules/flask/flask-mysql-database)
 
