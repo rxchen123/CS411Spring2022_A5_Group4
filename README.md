@@ -11,7 +11,7 @@ CS411 Project, Spring 2022, Lab A5 Group 4
 5. Go to the 'SQL' tab
 6. Copy and paste everything from schema.sql into the 'query box' and run the commands. Don't forget to click go. 
 
-[additional help] (https://www.askpython.com/python-modules/flask/flask-mysql-database)
+[additional help](https://www.askpython.com/python-modules/flask/flask-mysql-database)
 
 ### `npm start`
 
