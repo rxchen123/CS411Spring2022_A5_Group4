@@ -2,9 +2,9 @@
 
 CS411 Project, Spring 2022, Lab A5 Group 4
 
-## Available Scripts
+## Database Setup
 
-In the project directory, you can run:
+Install [XAMPP](https://www.apachefriends.org/index.html)
 
 ### `npm start`
 
