@@ -1,6 +1,6 @@
 # TravelHelper
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+CS411 Project, Spring 2022, Lab A5 Group 4
 
 ## Available Scripts
 
