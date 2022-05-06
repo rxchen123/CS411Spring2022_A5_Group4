@@ -18,9 +18,11 @@ CS411 Project, Spring 2022, Lab A5 Group 4
 
 ## Backend Setup
 1. [Optional]: create a virtual environment (you really should do this!)
-2. install all necessary packages from requirements.txt 'pip install -r requirements.txt' (or use pip3)
+2. install all necessary packages from requirements.txt using pip (or pip3)
+### `pip install -r requirements.txt` 
 3. export flask (not sure if this is needed or not?)
-		- (Mac, Linux) 'export FLASK_APP=app.py'
-		- (Windows) 'set FLASK_APP=app.py'
-4. in the terminal, run the command 'flask run app.py'
+		- (Mac, Linux) `export FLASK_APP=app.py`
+		- (Windows) `set FLASK_APP=app.py`
+4. in the terminal, run the command 
+### `flask run app.py`
 
