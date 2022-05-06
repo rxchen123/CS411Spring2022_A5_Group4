@@ -5,31 +5,20 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 //import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./components/index";
+import Home from "./components/Home";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import Register from "./components/Register";
 import Trip from "./components/Trip";
 import Unauth from "./components/Unauth";
-
-
+import Navigation from "./components/Navigation";
 
 //<Navigation />
 //<Footer />
 
-ReactDOM.render(
-    <Router>
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/trip" element={<Trip />} />
-            <Route path="/unauth" element={<Unauth />} >
-            </Route>
-        </Routes>
-    </Router>,
-    document.getElementById("root")
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <App/>
 );
 
 reportWebVitals();

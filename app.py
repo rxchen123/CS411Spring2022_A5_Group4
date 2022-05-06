@@ -16,6 +16,7 @@ from flask_cors import CORS, cross_origin
 
 #flask_jwt_extended: tokens for logging in and out
 from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
@@ -209,12 +210,10 @@ def protected():
     }, 200	
 
 # logout and render the post-log-out home page
-@app.route('/logout')
+@app.route('/logout', methods=['POST'])
 def logout():
 	# flask_login.logout_user() # STILL NEEDED? 
-	response = {
-		'message': 'Successfully logged out!'
-    }	
+	response = jsonify({"msg": "logout successful"})
 	unset_jwt_cookies(response)
 	return response
  
@@ -235,7 +234,6 @@ def trip():
 	email = get_jwt_identity() # This should work!!
 	print(getTrips(email), file=sys.stdout)
 	return {
-        'email' : email,
 		'trips': getTrips(email)
     }	
 	# return render_template('trip.html', name=email, trips=getTrips(email))
