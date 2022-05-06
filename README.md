@@ -23,3 +23,5 @@ CS411 Project, Spring 2022, Lab A5 Group 4
 3. run the following command using the terminal: 
 	### `flask run app.py`
 
+## Frontend Setup
+1. TBA
