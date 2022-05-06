@@ -20,10 +20,10 @@ CS411 Project, Spring 2022, Lab A5 Group 4
 1. [Optional]: create a virtual environment (you really should do this!)
 2. install all necessary packages from requirements.txt using pip (or pip3)
 	### `pip install -r requirements.txt` 
-3. run the following command using the terminal: 
+3. to startup the backend, run the following command using the terminal: 
 	### `flask run app.py`
 
 ## Frontend Setup
 1. enter into the 'react-templates' directory
-2. run the following command using the terminal:
+2. to startup the frontend, run the following command using the terminal:
 	### `npm start`
