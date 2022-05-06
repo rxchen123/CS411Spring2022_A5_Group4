@@ -27,3 +27,10 @@ CS411 Project, Spring 2022, Lab A5 Group 4
 1. enter into the 'react-templates' directory
 2. to startup the frontend, run the following command using the terminal:
 	### `npm start`
+
+
+## Hotel API
+1. Retrieve a key and a secret from [Amadeus Hotel API](https://developers.amadeus.com/self-service/category/hotel/api-doc/hotel-search)
+2. create a file called 'key.txt' and put the api key in it
+3. create a file called 'secret.txt' and put the secret in it
+4. run api.py
