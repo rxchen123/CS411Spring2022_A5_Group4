@@ -1,7 +1,7 @@
 import requests
 
-apiKey = "9lfXz1GdokFlp1ea7h4yUP5sShrGeyUF"
-apiSecret = "uI0lNTOtKcevuBEG"
+apiKey = ""
+apiSecret = ""
 accessToken = ""
 
 def getAccessToken():
