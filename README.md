@@ -9,7 +9,7 @@ CS411 Project, Spring 2022, Lab A5 Group 4
 ![](readme-img/xampp.png)
 3. Go to [http://localhost:80](http://localhost:3000)
 4. Navigate to 'phpMyAdmin' (located in the menu bar on the top right of the page)
-![](readme-img/xampp.png)
+![](readme-img/localhost.png)
 5. Go to the 'SQL' tab
 ![](readme-img/phpmyadmin.png)
 6. Copy and paste everything from schema.sql into the 'query box' and run the commands. Don't forget to click go. 
