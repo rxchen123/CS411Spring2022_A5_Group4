@@ -24,4 +24,6 @@ CS411 Project, Spring 2022, Lab A5 Group 4
 	### `flask run app.py`
 
 ## Frontend Setup
-1. TBA
+1. enter into the 'react-templates' directory
+2. run the following command using the terminal:
+	### `npm start`
