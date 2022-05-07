@@ -17,19 +17,3 @@ CREATE TABLE Trips (
   PRIMARY KEY (uemail, hotel, restaurant),
 	FOREIGN KEY (uemail) REFERENCES Users(email) ON DELETE CASCADE
 );
-
--- Run these commands if you want to add some users:
-USE travelhelper;
-INSERT INTO Users (email, password) VALUES ('annie@bu.edu', 'password');
-INSERT INTO Users (email, password) VALUES ('brad@bu.edu', 'password');
-
--- Run these commands if you want to add some trips:
-USE travelhelper;
-INSERT INTO Trips (uemail, hotel, restaurant) VALUES ('annie@bu.edu', 'Mariott', 'McDonalds');
-INSERT INTO Trips (uemail, hotel, restaurant) VALUES ('annie@bu.edu', 'Holiday Inn', 'Chipotle');
-INSERT INTO Trips (uemail, hotel, restaurant) VALUES ('brad@bu.edu',  'Hilton', 'Wendys');
-
--- Run these commands if you want to delete a table:
-USE travelhelper;
-DROP TABLE IF EXISTS Trips CASCADE;
-DROP TABLE IF EXISTS Users CASCADE;

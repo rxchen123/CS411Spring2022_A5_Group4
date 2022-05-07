@@ -152,14 +152,6 @@ function Trip(props){
     return (
       <div>
         <title>TravelHelper</title>
-        {"{"}% if name %{"}"}
-        {"{"}% if message %{"}"}
-        <h4>
-          {"{"}
-          {"{"}message{"}"}
-          {"}"}
-        </h4>
-        {"{"}% endif %{"}"}
         <h1>Create a Trip!</h1>
         <div id="trip">
           <input onChange={handleChange}
