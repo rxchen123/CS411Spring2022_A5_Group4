@@ -6,72 +6,31 @@ CS411 Project, Spring 2022, Lab A5 Group 4
 
 1. Install [XAMPP](https://www.apachefriends.org/index.html)
 2. Launch XAMPP. Under the 'My Servers' Tab, start  'MySQL Database' as well as 'Apache Web Server'
+![](readme-img/xampp.png)
 3. Go to [http://localhost:80](http://localhost:3000)
 4. Navigate to 'phpMyAdmin' (located in the menu bar on the top right of the page)
+![](readme-img/localhost.png)
 5. Go to the 'SQL' tab
+![](readme-img/phpmyadmin.png)
 6. Copy and paste everything from schema.sql into the 'query box' and run the commands. Don't forget to click go. 
 
-[additional help](https://www.askpython.com/python-modules/flask/flask-mysql-database)
+[additional help (if needed)](https://www.askpython.com/python-modules/flask/flask-mysql-database)
 
-### `npm start`
+## Backend Setup
+1. [Optional]: create a virtual environment (you really should do this!)
+2. install all necessary packages from requirements.txt using pip (or pip3)
+	### `pip install -r requirements.txt` 
+3. to startup the backend, run the following command using the terminal: 
+	### `flask run app.py`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Frontend Setup
+1. enter into the 'react-templates' directory
+2. to startup the frontend, run the following command using the terminal:
+	### `npm start`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Hotel API
+1. Retrieve a key and a secret from [Amadeus Hotel API](https://developers.amadeus.com/self-service/category/hotel/api-doc/hotel-search)
+2. create a file called 'key.txt' and put the api key in it
+3. create a file called 'secret.txt' and put the secret in it
+4. run api.py
