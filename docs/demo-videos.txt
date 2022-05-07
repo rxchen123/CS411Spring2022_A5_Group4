@@ -1,7 +1,0 @@
-Frontend/Currency API Demo: https://drive.google.com/file/d/1fx4YPIITvigagGb1MJW4ZaYKNP2jNQ0W/view?usp=sharing
-
-This video demos the (good looking) frontend that we had designed as well as the currency API. Unfortunately, we couldn't integrate this with the rest of our application in time. Note that this is the same video as the prototype demo video.
-
-Application/Hotel API Demo:https://drive.google.com/file/d/11V3lzJ9PZK1eOchuYKlmtuls-IbRj1Jf/view?usp=sharing
-
-This video demonstrates the core of our application and its interaction with the database, including login, registration, and displaying trips. The ability to insert trips directly from the frontend broke at the last minute, which is why the video does not demonstrate it. This video also demonstrates the usage of our second api to find hotels based on location, date, and the number of people. We also didn't have time to integrate this into our application.
