@@ -7,7 +7,8 @@ docs folder:
 - user-stories: contains the user stories requried for team assingment 2 as well as revised versions of all the stories
 - prototype-docs: contains all deliverables for team assignment 3
 - revision-history: a description/documentation of all the changes we made to the project, including the revised user stories
-- reflections-and-misc: some thoughts from the team regarding the project and some miscellaneous information about the process
+- reflections-and-misc: some thoughts from the team regarding the project and some miscellaneous information about the process.
+			We included this because there is no audio in the final video (video maker's mic doesn't work)
 
 ## Database Setup 
 
