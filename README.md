@@ -2,6 +2,13 @@
 
 CS411 Project, Spring 2022, Lab A5 Group 4
 
+docs folder: 
+- proposal: deliverable for team assignment 1 
+- user-stories: contains the user stories requried for team assingment 2 as well as revised versions of all the stories
+- prototype-docs: contains all deliverables for team assignment 3
+- revision-history: a description/documentation of all the changes we made to the project, including the revised user stories
+- reflections-and-misc: some thoughts from the team regarding the project and some miscellaneous information about the process
+
 ## Database Setup 
 
 1. Install [XAMPP](https://www.apachefriends.org/index.html)
